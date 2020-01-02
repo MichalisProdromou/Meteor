@@ -25,10 +25,31 @@ const routes = [
     name: "Dashboard",
     component: () => import("../views/Dashboard.vue")
   },
+  //  {
+  //   path: "/seasons",
+  //   name: "Seasons", 
+  //   component: () => import("../views/Seasons.vue"),
+  // },
   {
     path: "/seasons",
-    name: "Seasons",
-    component: () => import("../views/Seasons.vue")
+    name: "Seasons", 
+    component: () => import("../views/Seasons.vue"),
+    children: [
+      // UserHome will be rendered inside User's <router-view>
+        // when /user/:id is matched
+        { path: '', component: () => import("../components/Seasons/SeasonsMain.vue") },
+				
+        // UserProfile will be rendered inside User's <router-view>
+        // when /user/:id/profile is matched
+        { path: '/seasons/new', component: () => import("../components/Seasons/NewSeason.vue") },
+        { path: '/seasons/:id/view', component: () => import("../components/Seasons/ViewSeason.vue") },
+
+        // UserPosts will be rendered inside User's <router-view>
+        // when /user/:id/posts is matched
+        { path: '/seasons/:id/edit', component: () => import("../components/Seasons/EditSeason.vue") },
+        //TODO: Implement 404 page:
+        { path: '/*', component: () => import("../views/Login.vue") },
+    ]
   },
   {
     path: "/match-categories",
@@ -36,9 +57,9 @@ const routes = [
     component: () => import("../views/MatchCategories.vue")
   },
   {
-    path: "/championships",
-    name: "Championships",
-    component: () => import("../views/Championships.vue")
+    path: "/tournaments",
+    name: "Tournaments",
+    component: () => import("../views/Tournaments.vue")
   },
   {
     path: "/match-weekends",

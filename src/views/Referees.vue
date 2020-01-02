@@ -1,9 +1,8 @@
 <template>
-  <v-container fluid>
+  <v-container fluid >
     <v-row>
       <v-col sm="12">
-        <template >
-          
+        <template>          
           <v-fade-transition group hide-on-leave>
             <v-skeleton-loader
               :key="1"
