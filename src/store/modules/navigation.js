@@ -2,7 +2,7 @@ const navIcons = {
   dashboard: "mdi-view-dashboard",
   seasons: "mdi-calendar",
   matchYearCategories: "mdi-format-list-bulleted-type",
-  championships: "mdi-trophy",
+  tournaments: "mdi-trophy",
   matchWeekends: "mdi-calendar-weekend",
   teams: "mdi-soccer",
   players: "mdi-account-group",
@@ -42,10 +42,10 @@ const GetDefaultState = () => {
           route: "/match-categories"
         },
         {
-          icon: navIcons.championships,
-          i18nTag: "championships",
-          title: "Championships",
-          route: "/championships"
+          icon: navIcons.tournaments,
+          i18nTag: "tournaments",
+          title: "Tournaments",
+          route: "/tournaments"
         },
         {
           icon: navIcons.matchWeekends,

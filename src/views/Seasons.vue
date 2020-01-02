@@ -1,10 +1,8 @@
 <template>
-  <v-container fluid>
-    <v-row>
-      <v-col xs="12">
-      </v-col>
+  <v-container fluid fill-height>
+    <v-row align="stretch">
+      <router-view></router-view>
     </v-row>
-    
 
   </v-container>
 </template>
@@ -12,11 +10,17 @@
 <script>
 export default {
   name: "Seasons",
-  components: {},
+  components: {
+
+  },
   data: () => ({
 
   }),
-  methods: {}
+  methods: {
+    AddSeason(){
+      console.log("[Add season]")
+    }
+  }
 
 }
 </script>
