@@ -1,0 +1,21 @@
+{
+  "login": {
+    "username": "Username",
+    "password": "Password",
+    "login": "Login"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "seasons": "Seasons",
+    "matchYearCategories": "Match Categories",
+    "championships": "Championships",
+    "matchWeekends": "Match Weekends",
+    "teams": "Teams",
+    "referees": "Referees",
+    "players": "Players",
+    "matches": "Matches",
+    "fields": "Fields",
+    "logout": "Logout"
+    
+  }
+}

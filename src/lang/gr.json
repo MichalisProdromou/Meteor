@@ -1,0 +1,20 @@
+{
+  "login": {
+    "username": "Όνομα χρήστη",
+    "password": "Κωδικός πρόσβασης",
+    "login": "Είσοδος"
+  },
+  "navigation": {
+    "dashboard": "Κεντρική",
+    "seasons": "Σεζόν",
+    "matchYearCategories": "Κατηγορίες Αγώνων",
+    "championships": "Πρωταθλήματα",
+    "matchWeekends": "Αγωνιστικές",
+    "teams": "Ομάδες",
+    "referees": "Διαιτητές",
+    "players": "Παίκτες",
+    "matches": "Αγώνες",
+    "fields": "Γήπεδα",
+    "logout": "Αποσύνδεση"
+  }
+}
