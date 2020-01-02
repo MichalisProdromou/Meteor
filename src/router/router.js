@@ -48,7 +48,7 @@ const routes = [
         // when /user/:id/posts is matched
         { path: '/seasons/:id/edit', component: () => import("../components/Seasons/EditSeason.vue") },
         //TODO: Implement 404 page:
-        { path: '/*', component: () => import("../views/Login.vue") },
+        //{ path: '/*', component: () => import("../views/Login.vue") },
     ]
   },
   {
