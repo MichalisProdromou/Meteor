@@ -1,14 +1,35 @@
 <template>
-  <v-row align="stretch">
-    <v-col sm="12">
-
-    </v-col>
-  </v-row>
+  <v-data-table
+    :key="1"
+    :items="seasons"
+    :headers="headers"
+    :items-per-page="-1">
+  </v-data-table>
 </template>
 
 <script>
 export default {
-  name: "SeasonsList"
+  name: "SeasonsList",
+  props: ["seasons"],
+  data: () => ({
+    headers: [
+      {
+        text: 'Full name',
+        align: 'left',
+        value: 'name',
+      },
+      {
+        text: 'Phone no.',
+        align: 'left',
+        value: 'phone',
+      },
+      {
+        text: 'Email',
+        align: 'left',
+        value: 'email',
+      },
+    ]
+  })
   
 
 }

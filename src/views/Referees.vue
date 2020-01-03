@@ -89,10 +89,10 @@ export default {
   },
   mounted(){
     this.GetReferees();
-    this.$store.commit("SetDisplayModeButtons", true)
+    this.$store.commit("SetDisplayModeButtons", true);
   },
   beforeDestroy(){
-    this.$store.commit("SetDisplayModeButtons", false)
+    this.$store.commit("SetDisplayModeButtons", false);
   }
 
 }
