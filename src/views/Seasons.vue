@@ -1,6 +1,6 @@
 <template>
-  <v-container fluid fill-height>
-    <v-row align="stretch">
+  <v-container >
+    <v-row >
       <router-view 
         :fetchingData="fetchingData"
       ></router-view>

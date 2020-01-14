@@ -3,7 +3,12 @@
     <application-drawer/>
     <application-navbar/>
 
-    <v-content>
+    <v-content
+      :class="{
+        'mx-1': $vuetify.breakpoint.xsOnly,
+        'mx-2': $vuetify.breakpoint.smAndUp,
+        'mx-3': $vuetify.breakpoint.mdAndUp
+      }">
       <router-view></router-view>
       <!-- <HelloWorld /> -->
     </v-content>
@@ -27,7 +32,8 @@ export default {
     //
   }),
   created(){
-    console.log(this.$route)
+    console.log(this.$route);
+    console.log(this.$vuetify.breakpoint.name)
   }
 };
 </script>
