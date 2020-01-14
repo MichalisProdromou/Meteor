@@ -1,7 +1,9 @@
 <template>
-  <v-container fluid fill-height>
-    <v-row align="stretch">
-      <router-view></router-view>
+  <v-container >
+    <v-row >
+      <router-view 
+        :fetchingData="fetchingData"
+      ></router-view>
     </v-row>
 
   </v-container>
@@ -14,12 +16,31 @@ export default {
 
   },
   data: () => ({
-
+    fetchingData: false
   }),
   methods: {
-    AddSeason(){
-      console.log("[Add season]")
+    async FetchSeasons(){
+      try{
+        this.fetchingData = true;
+        const res = await this.$store.dispatch("FetchSeasons");
+        console.log("[Component - FetchSeasons]", res);
+        //TODO: Dispatch an action that will instantiate season objects and commit them to the store
+        this.$store.commit("SetSeasons", res);
+
+      }
+      catch(err) {
+        console.log(err);
+      }
+
+      this.fetchingData = false;
     }
+  },
+  mounted(){
+    this.FetchSeasons();
+    this.$store.commit("SetDisplayModeButtons", true);
+  },
+  beforeDestroy(){
+    this.$store.commit("SetDisplayModeButtons", false);
   }
 
 }
