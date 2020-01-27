@@ -1,6 +1,5 @@
 <template>
-  <v-card
-  >
+  <v-card>
     <v-card-title>
       <h1 class="text-center headline ma-auto">Create new season</h1>
     </v-card-title>

@@ -32,23 +32,45 @@
           </v-fade-transition>
         </template>
       </v-col>
+      <v-col cols="12" sm="12">
+        <v-btn        
+          fixed
+          dark
+          fab
+          bottom
+          right
+          color="primary"
+          @click.prevent="AddPlayer"
+        >
+          <v-icon>mdi-plus</v-icon>
+        </v-btn>
+      </v-col>   
     </v-row>
+
+    <new-player
+      v-if="showNewPlayerDialog"
+    >
+    </new-player>
   </v-container>
 </template>
 
 <script>
 import axios from "axios";
 import { mapGetters } from 'vuex';
+import eventBus from "../eventBus.js";
 import ListView from "../components/Players/ListView.vue";
 import GroupView from "../components/Players/GroupView.vue";
+import NewPlayer from "../components/Players/NewPlayer.vue";
 export default {
   name: "Players",
   components: {
     listView: ListView,
-    groupView: GroupView
+    groupView: GroupView,
+    newPlayer: NewPlayer
   },
   data: () => ({
-    players: []
+    players: [],
+    showNewPlayerDialog: false
   }),
   computed: {
     ...mapGetters([
@@ -79,7 +101,17 @@ export default {
         console.log(err);
         VM.$store.commit("SetPlayersFDS", false);
       }
+    },
+    AddPlayer(){
+      console.log("AddPlayer");
+      this.showNewPlayerDialog = true;
+    },
+    CloseNewPlayerDialog(){
+      this.showNewPlayerDialog = false;
     }
+  },
+  created(){
+    eventBus.$on("CloseNewPlayerDialog", this.CloseNewPlayerDialog);
   },
   mounted(){
     this.FetchPlayers();
@@ -87,6 +119,7 @@ export default {
   },
   beforeDestroy(){
     this.$store.commit("SetDisplayModeButtons", false);
+    eventBus.$off("CloseNewPlayerDialog", this.CloseNewPlayerDialog);
   }
 
 }
