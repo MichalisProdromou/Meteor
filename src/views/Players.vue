@@ -2,90 +2,62 @@
   <v-container fluid>
     <v-row>
       <v-col sm="12">
-        <v-btn-toggle
-          v-model="displayAsSelection"
-          mandatory
-        >
-          <v-btn>
-            <v-icon>mdi-format-list-bulleted</v-icon>
-          </v-btn>
-          <v-btn>
-            <v-icon>mdi-view-grid-outline</v-icon>
-          </v-btn>
-        </v-btn-toggle>
+        <template>          
+          <v-fade-transition group hide-on-leave>
+            <v-skeleton-loader
+              :key="1"
+              class="mx-auto"
+              type="table-tbody"
+              v-show="FetchingPlayers"
+              >
+            </v-skeleton-loader>
+            <div
+              :key="2"
+              class="mx-auto"              
+              v-show="!FetchingPlayers"
+            >
+              <v-fade-transition group hide-on-leave>
+                <list-view 
+                    v-show="DisplayModeSelection === 0"
+                    :key="1"
+                    :players="computedPlayers">
+                  </list-view>
+                  <group-view
+                    v-show="DisplayModeSelection === 1"
+                    :key="2"
+                    :players="computedPlayers"
+                  ></group-view>
+              </v-fade-transition>
+            </div>
+          </v-fade-transition>
+        </template>
       </v-col>
     </v-row>
-
-    <template v-if="displayAsSelection === 0">
-      <v-col sm="12">
-        <v-data-table
-        :items="computedPlayers"
-        :headers="headers"
-        :items-per-page="-1">
-        </v-data-table>
-      </v-col>
-    </template>
-
-    <template v-else>
-      <v-row>
-        <v-col 
-          sm="6"
-          md="4"
-          lg="4"
-          v-for="(player, index) in players"
-          :key="index"
-        >
-          <v-card>
-            <v-img
-              height="200px"
-              :src="player.imgUrl"
-            >
-            </v-img>
-            <v-card-title>{{player.name}}</v-card-title>
-            <v-card-text>
-              {{player.name}}
-            </v-card-text>
-          </v-card>
-        </v-col>
-        
-        
-      </v-row>
-    </template>
-    
-
   </v-container>
 </template>
 
 <script>
 import axios from "axios";
+import { mapGetters } from 'vuex';
+import ListView from "../components/Players/ListView.vue";
+import GroupView from "../components/Players/GroupView.vue";
 export default {
   name: "Players",
-  components: {},
+  components: {
+    listView: ListView,
+    groupView: GroupView
+  },
   data: () => ({
-    displayAsSelection: 0,
-    players: [],
-    headers: [
-      {
-        text: 'Full name',
-        align: 'left',
-        value: 'name',
-      },
-      {
-        text: 'Phone no.',
-        align: 'left',
-        value: 'phone',
-      },
-      {
-        text: 'Email',
-        align: 'left',
-        value: 'email',
-      },
-    ]
-
+    players: []
   }),
   computed: {
+    ...mapGetters([
+      'DisplayModeSelection',
+      'FetchingPlayers',
+      'AllPlayers'
+    ]),
     computedPlayers(){
-      let players = this.players.map(player => {
+      let players = this.AllPlayers.map(player => {
         player.imgUrl = "https://picsum.photos/200";
         return player;
       });
@@ -93,17 +65,28 @@ export default {
     }
   },
   methods: {
-    GetPlayers(){
+    async FetchPlayers(){
       const VM = this;
-      axios.get("https://jsonplaceholder.typicode.com/users")
-        .then(res => {
-          console.log(res);
-          VM.players = res.data;
-        })
+      try{
+        VM.$store.commit("SetPlayersFDS", true);
+        const res = await this.$store.dispatch("FetchPlayers");
+        console.log("[Component - FetchSeasons]", res);
+        //TODO: Dispatch an action that will instantiate players objects and commit them to the store
+        VM.$store.commit("SetPlayers", res);
+        VM.$store.commit("SetPlayersFDS", false);
+      }
+      catch(err) {
+        console.log(err);
+        VM.$store.commit("SetPlayersFDS", false);
+      }
     }
   },
   mounted(){
-    this.GetPlayers();
+    this.FetchPlayers();
+    this.$store.commit("SetDisplayModeButtons", true);
+  },
+  beforeDestroy(){
+    this.$store.commit("SetDisplayModeButtons", false);
   }
 
 }

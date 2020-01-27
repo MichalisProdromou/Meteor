@@ -3,6 +3,7 @@ import Vuex from "vuex";
 
 import navigation from "./modules/navigation.js";
 import seasons from "./modules/seasons.js";
+import players from "./modules/players.js";
 
 Vue.use(Vuex);
 
@@ -40,6 +41,7 @@ export default new Vuex.Store({
   getters,
   modules: {
     navigation,
-    seasons
+    seasons,
+    players
   }
 });

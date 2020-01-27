@@ -13,28 +13,25 @@
             </v-skeleton-loader>
             <div
               :key="2"
-              class="mx-auto"
-              
+              class="mx-auto"              
               v-show="!fetchingData"
             >
               <v-fade-transition group hide-on-leave>
-              <list-view 
-                v-show="DisplayModeSelection === 0"
-                :key="1"
-                :referees="compReferees">
-              </list-view>
-              <group-view
-                v-show="DisplayModeSelection === 1"
-                :key="2"
-                :referees="compReferees"
-              ></group-view>
+                <list-view 
+                  v-show="DisplayModeSelection === 0"
+                  :key="1"
+                  :referees="compReferees">
+                </list-view>
+                <group-view
+                  v-show="DisplayModeSelection === 1"
+                  :key="2"
+                  :referees="compReferees"
+                ></group-view>
               </v-fade-transition>
             </div>
           </v-fade-transition>
-        </template>
-        
-      </v-col>    
-      
+        </template>        
+      </v-col>      
     </v-row>
     
 
@@ -56,9 +53,7 @@ export default {
   },
   data: () => ({
     fetchingData: false,
-    referees: [],
-    
-
+    referees: []
   }),
   computed: {
     ...mapGetters([
