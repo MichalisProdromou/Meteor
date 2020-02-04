@@ -16,6 +16,7 @@
         :headers="headers"
         :items-per-page="-1"
         :search="search"
+        @click:row="PlayerRowClicked"
       >
       </v-data-table>
     </v-col>
@@ -23,6 +24,7 @@
 </template>
 
 <script>
+import eventBus from "../../eventBus.js";
 export default {
   name: "PlayersListView",
   props: ["players"],
@@ -47,6 +49,13 @@ export default {
     ]
 
   }),
+  methods: {
+    PlayerRowClicked(player){
+      //console.log(player);
+      eventBus.$emit("PlayerSelected", player);
+    },
+    
+  }
 
 }
 </script>

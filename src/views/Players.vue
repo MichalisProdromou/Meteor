@@ -49,8 +49,12 @@
 
     <new-player
       v-if="showNewPlayerDialog"
-    >
-    </new-player>
+    />
+
+    <player-card 
+      v-if="showPlayerCard"
+      :player="selectedPlayer"
+    />
   </v-container>
 </template>
 
@@ -58,19 +62,24 @@
 import axios from "axios";
 import { mapGetters } from 'vuex';
 import eventBus from "../eventBus.js";
+
 import ListView from "../components/Players/ListView.vue";
 import GroupView from "../components/Players/GroupView.vue";
+import PlayerCard from "../components/Players/PlayerCard.vue";
 import NewPlayer from "../components/Players/NewPlayer.vue";
+
 export default {
   name: "Players",
   components: {
     listView: ListView,
     groupView: GroupView,
+    playerCard: PlayerCard,
     newPlayer: NewPlayer
   },
   data: () => ({
-    players: [],
-    showNewPlayerDialog: false
+    showNewPlayerDialog: false,
+    selectedPlayer: null,
+    showPlayerCard: false,
   }),
   computed: {
     ...mapGetters([
@@ -92,7 +101,7 @@ export default {
       try{
         VM.$store.commit("SetPlayersFDS", true);
         const res = await this.$store.dispatch("FetchPlayers");
-        console.log("[Component - FetchSeasons]", res);
+        console.log("[Component - FetchPlayers]", res);
         //TODO: Dispatch an action that will instantiate players objects and commit them to the store
         VM.$store.commit("SetPlayers", res);
         VM.$store.commit("SetPlayersFDS", false);
@@ -108,10 +117,22 @@ export default {
     },
     CloseNewPlayerDialog(){
       this.showNewPlayerDialog = false;
+    },
+    OpenPlayerCard(){
+      this.showPlayerCard = true;
+    },
+    ClosePlayerCardDialog(){
+      this.showPlayerCard = false;
     }
   },
   created(){
     eventBus.$on("CloseNewPlayerDialog", this.CloseNewPlayerDialog);
+    eventBus.$on("ClosePlayerCardDialog", this.ClosePlayerCardDialog);
+    
+    eventBus.$on("PlayerSelected", player => {
+      this.selectedPlayer = player;
+      this.OpenPlayerCard();
+    });
   },
   mounted(){
     this.FetchPlayers();
@@ -120,6 +141,8 @@ export default {
   beforeDestroy(){
     this.$store.commit("SetDisplayModeButtons", false);
     eventBus.$off("CloseNewPlayerDialog", this.CloseNewPlayerDialog);
+    eventBus.$off("ClosePlayerCardDialog", this.ClosePlayerCardDialog);
+    eventBus.$off("PlayerSelected");
   }
 
 }
