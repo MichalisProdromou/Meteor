@@ -9,7 +9,7 @@
     >
       <v-hover>
         <template v-slot:default="{ hover }">
-          <v-card>
+          <v-card class="elevation-3">
             <v-img
               height="200px"
               :src="referee.imgUrl"

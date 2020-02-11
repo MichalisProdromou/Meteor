@@ -11,6 +11,7 @@
     </v-col>
     <v-col sm="12">
       <v-data-table
+      class="elevation-3 clickable"
         :key="1"
         :items="players"
         :headers="headers"
