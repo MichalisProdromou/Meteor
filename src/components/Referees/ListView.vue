@@ -7,10 +7,12 @@
       label="Search"
       single-line
       hide-details
+      
     ></v-text-field>
   </v-col>
   <v-col sm="12">
     <v-data-table
+      class="elevation-3 clickable"
       :key="1"
       :items="referees"
       :headers="headers"
@@ -63,5 +65,8 @@ export default {
 </script>
 
 <style>
+.clickable tr:hover{
+  cursor: pointer;
+}
 
 </style>

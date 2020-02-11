@@ -63,7 +63,7 @@
 <script>
 import axios from "axios";
 import { mapGetters } from 'vuex';
-import eventBus from '../eventBus';
+import eventBus from '../eventBus.js';
 
 import ListView    from "../components/Referees/ListView.vue";
 import GroupView   from "../components/Referees/GroupView.vue";
@@ -141,6 +141,9 @@ export default {
   },
   beforeDestroy(){
     this.$store.commit("SetDisplayModeButtons", false);
+    eventBus.$off("CloseNewRefereeDialog", this.CloseNewRefereeDialog);
+    eventBus.$off("CloseRefereeCardDialog", this.CloseRefereeCardDialog);
+    eventBus.$off("RefereeSelected");
   }
 
 }

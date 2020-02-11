@@ -56,8 +56,7 @@ export default {
   },
    methods: {
     CloseDialog(){
-      eventBus.$emit("CloserefereeCardDialog");
-      this.showRefereeCardDialog = false;
+      eventBus.$emit("CloseRefereeCardDialog");
     }
   }
 
