@@ -3,14 +3,16 @@
     <application-drawer/>
     <application-navbar/>
 
-    <v-content
+    <v-content>
+      <router-view></router-view>
+      <!-- <HelloWorld /> 
+      
       :class="{
         'mx-1': $vuetify.breakpoint.xsOnly,
         'mx-2': $vuetify.breakpoint.smAndUp,
         'mx-3': $vuetify.breakpoint.mdAndUp
-      }">
-      <router-view></router-view>
-      <!-- <HelloWorld /> -->
+      }"
+      -->
     </v-content>
   </v-app>
 </template>

@@ -85,8 +85,8 @@ const GetDefaultState = () => {
         },
         {
           icon: navIcons.logout,
-          i18nTag: "logout",
-          title: "Logout",
+          i18nTag: "login",
+          title: "Login",
           route: "/"
         },
 

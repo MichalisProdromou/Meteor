@@ -1,20 +1,38 @@
 <template>
-  <v-container fill-height>
+  <v-container fill-height id="login-container" class="pa-0 ma-0">
     <v-row
+      no-gutters
+      class="fill-height"
       align="center"
-      justify="center">
+      >
       <v-col
-        xs="12" 
-        sm="8"
-        md="6">
+        class="fill-height pa-4"
+        cols="12"
+        md="6"
+        order="2"
+        order-sm="2"
+        order-md="1"
+      >
+        <img src="@/assets/illustrations/welcome_cats.svg">
+      </v-col>
+      <v-col
+        cols="12"
+        md="6"
+        order="1"
+        order-sm="1"
+        order-md="2"
+      >
         <v-card elevation-12>
-          <v-toolbar
+          <v-card-title class="display-1 font-weight-medium">
+            Welcome back
+          </v-card-title>
+          <!-- <v-toolbar
             color="primary"
             dark
             flat
           >
           <v-toolbar-title>Login form</v-toolbar-title>
-          </v-toolbar>
+          </v-toolbar> -->
           <v-card-text>
             <v-form ref="loginForm">
               <v-text-field
@@ -54,6 +72,7 @@
           </v-card-actions>
         </v-card>
       </v-col>
+      
     </v-row>
   </v-container>
 </template>
@@ -107,5 +126,9 @@ export default {
 </script>
 
 <style>
+#login-container{
+  width: 100% !important;
+  max-width: 100% !important;
+}
 
 </style>

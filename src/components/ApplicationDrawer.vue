@@ -1,5 +1,6 @@
 <template>
   <v-navigation-drawer
+    v-if="LoggedInUser != null"
     app
     v-model="showAppDrawer"
   >
@@ -62,7 +63,8 @@ export default {
   }),
   computed: {
     ...mapGetters([
-      'UserRolesNavigation'
+      'UserRolesNavigation',
+      'LoggedInUser'
     ])
 
   },

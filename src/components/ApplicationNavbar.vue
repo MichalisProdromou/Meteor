@@ -1,6 +1,6 @@
 <template>
   <v-app-bar
-    v-if="showAppBar" 
+    v-if="showAppBar && LoggedInUser != null" 
     app 
     flat
     light
@@ -41,7 +41,8 @@ export default {
   computed: {
     ...mapGetters([
       'UserRolesNavigation',
-      'ShowDisplayModeButtons'
+      'ShowDisplayModeButtons',
+      'LoggedInUser'
     ]),
     routeFullPath(){
       return this.$route.fullPath;
