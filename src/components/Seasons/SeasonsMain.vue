@@ -42,7 +42,7 @@
         fab
         bottom
         right
-        color="pink"
+        color="primary"
         @click.prevent="AddSeason"
       >
         <v-icon>mdi-plus</v-icon>

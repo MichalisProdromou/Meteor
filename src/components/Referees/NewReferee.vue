@@ -1,7 +1,7 @@
 <template>
   <v-card
   >
-    <v-card-title>
+    <!-- <v-card-title>
       <h1 class="text-center headline ma-auto">Create new referee</h1>
     </v-card-title>
     <v-card-subtitle>
@@ -112,7 +112,7 @@
       <v-btn 
         color="success"
       >Save</v-btn>
-    </v-card-actions>
+    </v-card-actions> -->
   </v-card>
 </template>
 

@@ -20,19 +20,19 @@ export default {
   }),
   methods: {
     async FetchSeasons(){
+      const VM = this;
       try{
-        this.fetchingData = true;
-        const res = await this.$store.dispatch("FetchSeasons");
+        VM.fetchingData = true;
+        const res = await VM.$store.dispatch("FetchSeasons");
         console.log("[Component - FetchSeasons]", res);
         //TODO: Dispatch an action that will instantiate season objects and commit them to the store
-        this.$store.commit("SetSeasons", res);
-
+        VM.$store.commit("SetSeasons", res);
       }
       catch(err) {
         console.log(err);
       }
 
-      this.fetchingData = false;
+      VM.fetchingData = false;
     }
   },
   mounted(){
