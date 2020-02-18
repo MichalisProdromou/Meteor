@@ -4,26 +4,44 @@
       no-gutters
       class="fill-height"
       align="center"
+      justify="center"
       >
       <v-col
-        class="fill-height pa-4"
+        v-if="$vuetify.breakpoint.mdAndUp"
+        class="fill-height px-4 text-center"
         cols="12"
         md="6"
         order="2"
         order-sm="2"
         order-md="1"
       >
-        <img src="@/assets/illustrations/welcome_cats.svg">
+        <img 
+          src="@/assets/illustrations/goal.svg"
+          :style="{
+            'max-height' : loginImgDimensions.height + 'px',
+            'margin-top' : loginImgDimensions.marginY + 'px'
+            }"
+        >
       </v-col>
       <v-col
+        :class="{
+          'fill-height' : $vuetify.breakpoint.mdAndUp
+        }"
+        class="px-4 text-center"
         cols="12"
+        sm="8"
         md="6"
         order="1"
         order-sm="1"
         order-md="2"
       >
-        <v-card elevation-12>
-          <v-card-title class="display-1 font-weight-medium">
+        <v-card 
+        flat
+        :style="{
+          'margin-top' : loginImgDimensions.marginY + 'px'
+          }"
+        >
+          <v-card-title class="display-1">
             Welcome back
           </v-card-title>
           <!-- <v-toolbar
@@ -36,24 +54,22 @@
           <v-card-text>
             <v-form ref="loginForm">
               <v-text-field
-              class="my-1"
-                autofocus
+                class="my-1"
                 outlined
+                autofocus                
                 :value="username"
                 :label="$t('login.username')"
                 name="login"
-                prepend-icon="mdi-account-circle"
                 type="text"
                 :rules="[rules.required]"
               ></v-text-field>
 
               <v-text-field
                 class="my-1"
-                :value="password"
                 outlined
+                :value="password"                
                 :label="$t('login.password')"
                 name="password"
-                prepend-icon="mdi-lock"
                 :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                 :type="showPassword ? 'text' : 'password'"
                 @click:append="showPassword = !showPassword" 
@@ -62,9 +78,9 @@
             </v-form>
           </v-card-text>
           <v-card-actions>
-            <v-spacer></v-spacer>
             <v-btn 
               color="primary"
+              block
               @click.prevent="Login"
               :loading="loading"
               >{{ $t('login.login') }}
@@ -95,6 +111,37 @@ export default {
       },
     },
   }),
+  computed: {
+    loginImgDimensions(){
+      let dimensions = {
+        height: 0,
+        marginY: 0
+      };
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs':
+          dimensions.height = 200;
+          break;
+        case 'sm':
+          dimensions.height = 250;
+          break;
+        case 'md':
+          dimensions.height = 300;
+          dimensions.marginY = (window.innerHeight - dimensions.height) / 2;
+          break;
+        case 'lg':
+          dimensions.height = 350;
+          dimensions.marginY = (window.innerHeight - dimensions.height) / 2;
+          break;      
+        default:
+          dimensions.height = 400;
+          dimensions.marginY = (window.innerHeight - dimensions.height) / 2;
+          break;
+      }
+      
+      console.log(this.$vuetify.breakpoint.name,dimensions);
+      return dimensions;
+    }
+  },
   methods: {
     Login: function(){
       //console.log('login');
