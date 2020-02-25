@@ -1,7 +1,7 @@
 <template>
   <v-container fluid >
     <v-row>
-      <v-col sm="12">
+      <v-col cols="12" sm="12">
         <template>          
           <v-fade-transition group hide-on-leave>
             <v-skeleton-loader
@@ -9,7 +9,7 @@
               class="mx-auto"
               type="table-tbody"
               v-show="FetchingReferees"
-              >
+            >
             </v-skeleton-loader>
             <div
               :key="2"

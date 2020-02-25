@@ -1,4 +1,4 @@
-import { Get } from "../api.js";
+import { Get, Post } from "../api.js";
 
 const GetDefaultState = () => {
   return {
@@ -15,6 +15,9 @@ const mutations = {
   },
   SetSeasons(state, seasons) {
     state.seasons = seasons;
+  },
+  SetSeasonsFDS(state, bool) {
+    state.fetchingData = bool;
   }
 }
 
@@ -23,7 +26,6 @@ const actions = {
     let seasons = await Get("https://jsonplaceholder.typicode.com/users");
     console.log("[Action - FetchSeasons]", seasons);
     return seasons.data;
-
   }
 };
 

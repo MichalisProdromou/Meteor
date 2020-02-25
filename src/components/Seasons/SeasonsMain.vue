@@ -34,7 +34,7 @@
       
     </v-col>  
     <v-col cols="12" sm="12">
-      <!-- The floating action button -->
+      <!-- The floating action button  @click.prevent="AddSeason"-->
       <v-btn
         to="/seasons/new"
         fixed
@@ -43,7 +43,7 @@
         bottom
         right
         color="primary"
-        @click.prevent="AddSeason"
+        
       >
         <v-icon>mdi-plus</v-icon>
       </v-btn>
@@ -55,6 +55,8 @@
 import { mapGetters } from 'vuex';
 import SeasonsList from "./SeasonsList.vue";
 import SeasonsGroup from "./SeasonsGroup.vue";
+
+
 export default {
   name: "SeasonsMain",
   props:["fetchingData"],

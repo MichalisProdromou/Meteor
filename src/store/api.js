@@ -11,3 +11,15 @@ export const Get = function(url) {
       })
   });
 }
+
+export const Post = function(url, payload) {
+  return new Promise( (resolve, reject) => {
+    axios.post(url,payload)
+    .then(res => {
+      resolve(res);
+    })
+    .catch(err => {
+      reject(err);
+    })
+  })
+}

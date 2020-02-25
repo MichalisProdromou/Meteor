@@ -1,4 +1,4 @@
-import { Get } from "../api.js";
+import { Get, Post } from "../api.js";
 
 const GetDefaultState = () => {
   return {

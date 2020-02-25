@@ -57,7 +57,7 @@
                 class="my-1"
                 outlined
                 autofocus                
-                :value="username"
+                v-model="username"
                 :label="$t('login.username')"
                 name="login"
                 type="text"
@@ -67,7 +67,7 @@
               <v-text-field
                 class="my-1"
                 outlined
-                :value="password"                
+                 v-model="password"                
                 :label="$t('login.password')"
                 name="password"
                 :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
@@ -94,12 +94,15 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name: "Login",
   components: {},
   data: () => ({
-    username: "",
-    password: "",
+    
+    username: "mike@gmail.com",
+    password: "123456",
     showPassword: false,
     loading: false,
     rules: {
@@ -138,22 +141,34 @@ export default {
           break;
       }
       
-      console.log(this.$vuetify.breakpoint.name,dimensions);
+      console.log(this.$vuetify.breakpoint.name, dimensions);
       return dimensions;
     }
   },
   methods: {
-    Login: function(){
+    async Login(){
       //console.log('login');
       const VM = this;
       if(!VM.$refs.loginForm.validate()){
         return;
       }
       VM.loading = true;
-      VM.SimulateNetworkRequest()
-        .then( () => {
-          VM.loading = false;
-        })
+      try {
+        const payload = {
+          email: VM.username,
+          password: VM.password
+        }
+        let loginRes = await VM.$store.dispatch("Login", payload);
+        console.log(loginRes);
+      } catch (err) {
+        console.log(err);
+      }
+      VM.loading = false;
+      
+      // VM.SimulateNetworkRequest()
+      //   .then( () => {
+      //     VM.loading = false;
+      //   })
 
     },
     SimulateNetworkRequest: function(){

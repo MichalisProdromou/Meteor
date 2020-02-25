@@ -1,20 +1,14 @@
-const navIcons = {
-  dashboard: "mdi-view-dashboard",
-  seasons: "mdi-calendar",
-  matchYearCategories: "mdi-format-list-bulleted-type",
-  tournaments: "mdi-trophy",
-  matchWeekends: "mdi-calendar-weekend",
-  teams: "mdi-soccer",
-  players: "mdi-account-group",
-  referees: "mdi-whistle",  
-  matches: "mdi-television-classic",
-  fields: "mdi-soccer-field",
-  logout: "mdi-logout"
-}
+import { Get, Post } from "../api.js";
 
 const GetDefaultState = () => {
   return {
-    loggedInUser: null
+    //loggedInUser: null,
+    //TODO: Put the normal functionality back when the login works...
+    loggedInUser: {
+      name: "Mike",
+      pass: "root"
+    },
+    backendURL: process.env.VUE_APP_BACKEND_URL//"http://phplaravel-356521-1164109.cloudwaysapps.com/api"
   }
 }
 
@@ -29,7 +23,14 @@ const mutations = {
   }
 }
 
-const actions = {};
+const actions = {
+  async Login({state}, authObj){
+    console.log(state.backendURL);
+    let url = `${state.backendURL}/login?`;
+    let response = await Post(url, authObj);
+    return response;
+  }
+};
 
 const getters = {
   LoggedInUser: state => {
