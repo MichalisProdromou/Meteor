@@ -94,15 +94,16 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions } from 'vuex';
+import firebase from "firebase";
 
 export default {
   name: "Login",
   components: {},
   data: () => ({
     
-    username: "mike@gmail.com",
-    password: "123456",
+    username: "",
+    password: "",
     showPassword: false,
     loading: false,
     rules: {
@@ -153,16 +154,31 @@ export default {
         return;
       }
       VM.loading = true;
-      try {
-        const payload = {
-          email: VM.username,
-          password: VM.password
-        }
-        let loginRes = await VM.$store.dispatch("Login", payload);
-        console.log(loginRes);
-      } catch (err) {
-        console.log(err);
-      }
+      // try {
+        
+      //   const payload = {
+      //     email: VM.username,
+      //     password: VM.password
+      //   }
+      //   let loginRes = await VM.$store.dispatch("Login", payload);
+      //   console.log(loginRes);
+        
+      // } catch (err) {
+      //   console.log(err);
+      // }
+
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(VM.username, VM.password)
+        .then(data => {
+          console.log(data);
+          this.$router.replace({ name: "Dashboard" });
+        })
+        .catch(err => {
+          this.error = err.message;
+        });
+    
+
       VM.loading = false;
       
       // VM.SimulateNetworkRequest()

@@ -41,7 +41,6 @@
           fab
           bottom
           right
-          color="primary"
           @click.prevent="AddReferee"
         >
           <v-icon>mdi-plus</v-icon>
@@ -64,11 +63,12 @@
 import axios from "axios";
 import { mapGetters } from 'vuex';
 import eventBus from '../eventBus.js';
+import firebase from "firebase";
 
 import ListView    from "../components/Referees/ListView.vue";
 import GroupView   from "../components/Referees/GroupView.vue";
 import RefereeCard from "../components/Referees/RefereeCard.vue";
-import NewReferee  from "../components/Referees/NewReferee.vue";
+import NewReferee  from "../components/Referees/NewReferee/NewReferee.vue";
 
 
 export default {
@@ -82,7 +82,8 @@ export default {
   data: () => ({
     showNewRefereeDialog: false,
     selectedReferee: null,
-    showRefereeCard: false
+    showRefereeCard: false,
+    fbReferees: []
   }),
   computed: {
     ...mapGetters([
@@ -99,6 +100,25 @@ export default {
     }
   },
   methods: {
+    async GetRefereesFB(){
+      let db = firebase.firestore();
+      let docs = await db.collection("referees").get();
+      docs.forEach(doc => {
+        this.fbReferees.push(doc);
+      });
+
+      console.log(this.fbReferees);
+      let firstUser = this.fbReferees[0].data();
+      console.log(firstUser);
+      //   .then((querySnapshot) => {
+      //     querySnapshot.forEach((doc) => {
+      //       this.fbReferees.push(doc);
+      //       //console.log(doc.data());
+      //     });
+
+      // });
+
+    },
     async GetReferees(){
       const VM = this;
       try{
@@ -117,6 +137,9 @@ export default {
     AddReferee(){
       console.log("AddReferee");
       this.showNewRefereeDialog = true;
+    },
+    CloseNewRefereeDialog() {
+      this.showNewRefereeDialog = false;
     },
     OpenRefereerCard(){
       this.showRefereeCard = true;
@@ -137,6 +160,7 @@ export default {
   },
   mounted(){
     this.GetReferees();
+    this.GetRefereesFB();
     this.$store.commit("SetDisplayModeButtons", true);
   },
   beforeDestroy(){

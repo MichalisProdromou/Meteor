@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer
-    v-if="LoggedInUser != null"
+    v-if="LoggedInUser.loggedIn"
     app
     v-model="showAppDrawer"
   >
@@ -28,6 +28,15 @@
         </v-list-item-title>
       </v-list-item>
     </template>
+    <v-divider/>
+    <v-list-item @click.prevent="LogOut">
+        <v-list-item-action>
+          <v-icon>mdi-logout</v-icon>
+        </v-list-item-action>
+        <v-list-item-title>
+          {{ $t("navigation.logout") }}
+        </v-list-item-title>
+      </v-list-item>
     </v-list>
     <v-divider/>
     <!-- <v-spacer/> -->
@@ -43,8 +52,15 @@
     >
       Gr
     </v-btn>
+
+    <v-switch
+      v-model="$vuetify.theme.dark"
+      hide-details
+      inset
+      label="Theme Dark"
+    ></v-switch>
     </v-card-actions>
-    </v-card>
+  </v-card>
     
     
     
@@ -55,6 +71,7 @@
 <script>
 import eventBus from "../eventBus.js";
 import { mapGetters } from 'vuex';
+import firebase from "firebase";
 
 export default {
   data: () => ({
@@ -79,6 +96,17 @@ export default {
     UpdateNavTranslation(){
       const nav = this.UserRolesNavigation(this);  
       this.navItems = nav["Admin"];
+    },
+    LogOut(){
+      firebase
+        .auth()
+        .signOut()
+        .then((e) => {
+          console.log("Log out", e);
+          this.$router.replace({
+            name: "Login"
+          });
+        });
     }
   },
   created() {

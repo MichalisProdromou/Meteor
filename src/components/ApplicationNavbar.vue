@@ -1,16 +1,16 @@
 <template>
   <v-app-bar
-    v-if="showAppBar && LoggedInUser != null" 
+    v-if="LoggedInUser.loggedIn" 
     app 
     flat
-    light
-    color="#FAFAFA"
+    color="secondary"
     >
     <v-app-bar-nav-icon @click="ToggleAppDrawer($event)"></v-app-bar-nav-icon>
     <v-toolbar-title>{{ breadcrumbParent }}</v-toolbar-title>
     <v-spacer></v-spacer>
     <v-toolbar-items>
-      <template v-if="ShowDisplayModeButtons">
+      
+      <!-- <template v-if="ShowDisplayModeButtons">
         <v-btn-toggle
           v-model="displayModeSelection"
           mandatory
@@ -22,7 +22,7 @@
             <v-icon>mdi-view-grid-outline</v-icon>
           </v-btn>
         </v-btn-toggle>
-      </template>
+      </template> -->
     </v-toolbar-items>
   </v-app-bar>
 </template>
@@ -33,7 +33,7 @@ import { mapGetters } from 'vuex';
 
 export default {
   data: () => ({
-    showAppBar: true,
+    // showAppBar: true,
     breadcrumbParent: "",
     breadcrumbChild: "",
     displayModeSelection: 0,

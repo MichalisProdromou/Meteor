@@ -83,12 +83,12 @@ const GetDefaultState = () => {
           title: "Fields",
           route: "/fields"
         },
-        {
-          icon: navIcons.logout,
-          i18nTag: "login",
-          title: "Login",
-          route: "/"
-        },
+        // {
+        //   icon: navIcons.logout,
+        //   i18nTag: "logout",
+        //   title: "Logout",
+        //   route: "/"
+        // },
 
       ]
     }

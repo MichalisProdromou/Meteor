@@ -3,7 +3,7 @@
     <application-drawer/>
     <application-navbar/>
 
-    <v-content>
+    <v-content class="bg-dark">
       <router-view></router-view>
       <!-- <HelloWorld /> 
       
@@ -39,3 +39,9 @@ export default {
   }
 };
 </script>
+
+<style>
+  /* .bg-dark { 
+    background: #263238;
+  } */
+</style>
