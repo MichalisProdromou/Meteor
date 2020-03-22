@@ -8,28 +8,28 @@
       height="100%">
     <v-list>
       <template v-for="(nav, index) in navItems">
-      <v-list-group
-        v-if="nav.sublinks"
-        :key="index"
-      >
-      
-      </v-list-group>
+        <v-list-group
+          v-if="nav.sublinks"
+          :key="index"
+        >
+        
+        </v-list-group>
 
-      <v-list-item
-        v-else
-        :key="index"
-        :to="nav.route"
-      >
-        <v-list-item-action>
-          <v-icon>{{ nav.icon }}</v-icon>
-        </v-list-item-action>
-        <v-list-item-title>
-          {{ nav.title }}
-        </v-list-item-title>
-      </v-list-item>
-    </template>
-    <v-divider/>
-    <v-list-item @click.prevent="LogOut">
+        <v-list-item
+          v-else
+          :key="index"
+          :to="nav.route"
+        >
+          <v-list-item-action>
+            <v-icon>{{ nav.icon }}</v-icon>
+          </v-list-item-action>
+          <v-list-item-title>
+            {{ nav.title }}
+          </v-list-item-title>
+        </v-list-item>
+      </template>
+      <v-divider/>
+      <v-list-item @click.prevent="LogOut">
         <v-list-item-action>
           <v-icon>mdi-logout</v-icon>
         </v-list-item-action>
@@ -38,6 +38,9 @@
         </v-list-item-title>
       </v-list-item>
     </v-list>
+
+    
+
     <v-divider/>
     <!-- <v-spacer/> -->
     <v-card-actions>
@@ -53,12 +56,35 @@
       Gr
     </v-btn>
 
-    <v-switch
+    <v-btn icon>
+      <v-icon
+        v-if="$vuetify.theme.dark"
+        @click.prevent="$vuetify.theme.dark = !$vuetify.theme.dark"
+      >
+        mdi-brightness-4
+      </v-icon>
+      <v-icon
+        v-else
+        @click.prevent="$vuetify.theme.dark = !$vuetify.theme.dark"
+      >
+        mdi-brightness-7
+      </v-icon>
+      <!-- <v-checkbox
+        v-model="$vuetify.theme.dark"
+        hide-details
+        on-icon="mdi-brightness-4"
+        off-icon="mdi-brightness-7 "        
+      ></v-checkbox> -->
+    </v-btn>
+
+    
+
+    <!-- <v-switch
       v-model="$vuetify.theme.dark"
       hide-details
       inset
       label="Theme Dark"
-    ></v-switch>
+    ></v-switch> -->
     </v-card-actions>
   </v-card>
     
